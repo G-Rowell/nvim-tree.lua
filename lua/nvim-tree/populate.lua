@@ -132,6 +132,13 @@ local function gen_ignore_check(cwd)
   return function(path)
     local basename = utils.path_basename(path)
 
+    -- override any ignored files, to ensure they show
+    -- if vim.g.nvim_tree_ignore_show and #vim.g.nvim_tree_ignore_show > 0 then
+    --   for _, entry in pairs(vim.g.nvim_tree_ignore_show) do
+    --     if basename == entry then return false end
+    --   end
+    -- end
+
     if not M.show_ignored then
       if vim.g.nvim_tree_gitignore == 1 then
         if git.should_gitignore(path) then return true end
